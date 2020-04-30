@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>cookie</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="css/layui.css" >
+  
+</head>
+<body>
+ 
+ 
+
+ <div style="position: relative;left: 45%;top: 200px;">
+ <button onclick="setCookie()" class="layui-btn"> set-cookie</button>
+ <button class="layui-btn layui-btn-normal" onclick="getCookie()"> get-cookie</button>
+ </div>
+
+          
+
+<script src="jquery.min.js" charset="utf-8"></script>
+<script src="layui.all.js" charset="utf-8"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script>
+function setCookie(){
+$.cookie('lession1',getNowTime(),{ expires: 7 });
+layer.msg($.cookie('lession1') == undefined ? "cookie 设置失败！" : "cookie 设置成功！")
+}
+function getCookie(){
+let tempCookie = $.cookie('lession1');
+layer.alert(tempCookie == undefined ? 'system error！' : "已设置的cookie时间:"+tempCookie)
+}
+function getNow(s) {
+return s < 10 ? '0' + s: s;
+}
+function getNowTime(){
+
+var myDate = new Date();             
+
+let year=myDate.getFullYear()        //获取当前年
+	,month=myDate.getMonth()+1   //获取当前月
+	,date=myDate.getDate()
+	,h=myDate.getHours()
+	,m=myDate.getMinutes()
+	,s=myDate.getSeconds();
+return year+'-'+getNow(month)+"-"+getNow(date)+" "+getNow(h)+':'+getNow(m)+":"+getNow(s);
+}
+
+</script>
+</body>
+</html>
