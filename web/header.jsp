@@ -10,7 +10,7 @@
 <%--  String path = request.getContextPath();--%>
 <%--  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";--%>
 <%--%>--%>
-<c:set var="url"><%=basePath%></c:set>
+<%--<c:set var="url"><%=basePath%></c:set>--%>
 <html>
   <head>
     <title></title>

@@ -24,7 +24,7 @@ import java.util.Set;
  * @author: lyy
  * @generate: 2020-04-29 15:11
  **/
-@WebServlet(urlPatterns = {"/","/listStudent"})
+@WebServlet(urlPatterns = {"/listStudent"})
 public class StudentList extends HttpServlet implements IdRegister {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,6 +32,10 @@ public class StudentList extends HttpServlet implements IdRegister {
         Integer num = StringUtils.isBlank(pageNum) ? 1 : Integer.valueOf(pageNum);
         Set<String> zrevrange = RedisUtil.getInstance().SORTSET.zrevrange(ztableName, (num-1) * 10, num * 10 -1);
         String[] keys = (String[])zrevrange.toArray(new String[zrevrange.size()]);
+        if(keys == null || keys.length < 1) {
+            req.getRequestDispatcher("/listStudent.jsp").forward(req,resp);
+            return;
+        }
         List<String> temp = getRedisHash().hmget(htableName, keys);
         List<Student> rest =new ArrayList();
         temp.forEach(e->{rest.add( Common.toStudent(e));});

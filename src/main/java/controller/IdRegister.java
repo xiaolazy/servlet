@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.time.LocalDate;
@@ -31,7 +32,8 @@ public interface IdRegister {
     default RedisUtil.Hash getRedisHash(){
         return  RedisUtil.getInstance().HASH;
     }
-    default void setDefaultParameter(HttpServletRequest req, HttpServletResponse resp){
+    default void setDefaultParameter(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
+        req.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=utf-8");
     }
 

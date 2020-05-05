@@ -55,8 +55,8 @@
 
           let client = new OSS({
             endpoint: 'oss-cn-beijing.aliyuncs.com/',
-            accessKeyId: 'LTAI7Ix89ALe4rhV',
-            accessKeySecret: '1VIaYHuqL23wuDb2vh9MEh99N3fj3V',
+            accessKeyId: '',
+            accessKeySecret: '',
             bucket: 'icanlyy'
           });
           //storeAs表示上传的object name , file表示上传的文件

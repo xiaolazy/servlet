@@ -116,9 +116,9 @@
         </div>
       </div>
     </div>
-  <script src="layui/jquery.min.js"/>
-  <script src="layui/layui.all.js"/>
-  <script>
+      <script src="layui/jquery.min.js"></script>
+  <script src="layui/layui.all.js"></script>
+  <script type="text/javascript">
     layui.use(['element', 'layer'], function(){
       var element = layui.element;
       var layer = layui.layer;

@@ -26,8 +26,7 @@ public class CrosHeaderFilter implements Filter {
         resp.setHeader("Access-Control-Allow-Origin","*");
         resp.setHeader("Access-Control-Allow-Methods","PUT,GET,POST,HEAD,DELETE");
         resp.setHeader("Access-Control-Allow-Headers","*");
-        req.setCharacterEncoding("utf-8");
-//        resp.setHeader("Access-Control-Expose-Headers","etag,X-Powered-By");
+        resp.setHeader("Access-Control-Expose-Headers","etag,X-Powered-By");
         filterChain.doFilter(req,resp);
     }
 

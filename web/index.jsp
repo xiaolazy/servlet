@@ -25,7 +25,12 @@
   <a href="<%=basePath%>topicTwo" class="layui-btn">题目2Servlet中转</a>
   <a href="<%=basePath%>topicTwoa" class="layui-btn">题目2直传</a>
   <a href="<%=basePath%>topicThree" class="layui-btn">题目3</a>
-  <script src="layui/jquery.min.js"/>
-  <script src="layui/layui.all.js"/>
+  <script src="layui/jquery.min.js"> </script>
+  <script src="layui/layui.all.js"> </script>
+  <script>
+    $(function () {
+      location.replace('<%=basePath%>listStudent')
+    })
+  </script>
   </body>
 </html>
