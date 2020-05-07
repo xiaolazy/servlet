@@ -31,26 +31,23 @@ public class StudentList extends HttpServlet implements IdRegister {
         String pageNum = req.getParameter("pageNum");
         Integer num = StringUtils.isBlank(pageNum) ? 1 : Integer.valueOf(pageNum);
         Set<String> zrevrange = RedisUtil.getInstance().SORTSET.zrevrange(ztableName, (num-1) * 10, num * 10 -1);
-        String[] keys = (String[])zrevrange.toArray(new String[zrevrange.size()]);
-        if(keys == null || keys.length < 1) {
-            req.getRequestDispatcher("/listStudent.jsp").forward(req,resp);
-            return;
+        if(zrevrange == null || zrevrange.size() < 1) {
+            zrevrange = RedisUtil.getInstance().SORTSET.zrevrange(ztableName, 0, 9);
+            if(zrevrange == null || zrevrange.size() < 1) {
+                req.getRequestDispatcher("/listStudent.jsp").forward(req,resp);
+                return;
+            }
         }
+        String[] keys = (String[])zrevrange.toArray(new String[zrevrange.size()]);
+
         List<String> temp = getRedisHash().hmget(htableName, keys);
         List<Student> rest =new ArrayList();
         temp.forEach(e->{rest.add( Common.toStudent(e));});
         req.setAttribute("rest",rest);
         req.setAttribute("currPage",num);
-        req.setAttribute("count",RedisUtil.getInstance().SORTSET.zcard(ztableName)/10 + 1);
+        long zcard = RedisUtil.getInstance().SORTSET.zcard(ztableName);
+        req.setAttribute("count",(zcard%10) == 0 ? zcard/10 : zcard/10 + 1);
         req.getRequestDispatcher("/listStudent.jsp").forward(req,resp);
         successData(resp, PageResult.successData(zrevrange));
-    }
-    public static void main(String[] args) {
-        System.out.println(26/10+1);
-        System.out.println(1/10+1);
-        System.out.println(0/10+1);
-        System.out.println(12/10+1);
-        System.out.println(33/10+1);
-        System.out.println(65/10+1);
     }
 }
