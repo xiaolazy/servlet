@@ -43,9 +43,10 @@ public class StudentList extends HttpServlet implements IdRegister {
         List<String> temp = getRedisHash().hmget(htableName, keys);
         List<Student> rest =new ArrayList();
         temp.forEach(e->{rest.add( Common.toStudent(e));});
+        long zcard = RedisUtil.getInstance().SORTSET.zcard(ztableName);
+
         req.setAttribute("rest",rest);
         req.setAttribute("currPage",num);
-        long zcard = RedisUtil.getInstance().SORTSET.zcard(ztableName);
         req.setAttribute("count",(zcard%10) == 0 ? zcard/10 : zcard/10 + 1);
         req.getRequestDispatcher("/listStudent.jsp").forward(req,resp);
         successData(resp, PageResult.successData(zrevrange));
